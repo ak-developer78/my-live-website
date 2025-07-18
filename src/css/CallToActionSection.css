@@ -1,0 +1,44 @@
+/* --- cta.css --- */
+/* Styles for the main call-to-action banner. */
+
+.cta-section {
+  padding: 60px 0;
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+.cta-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.cta-text h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.cta-text p {
+  color: var(--footer-text);
+  max-width: 500px;
+}
+
+.cta-button-main {
+  background-image: linear-gradient(to right, var(--accent-teal), var(--accent-blue));
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+  white-space: nowrap;
+}
+
+.cta-button-main:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(20, 184, 166, 0.3);
+}

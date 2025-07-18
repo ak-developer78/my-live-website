@@ -1,0 +1,158 @@
+/* --- CONTACT POPUP MODAL (WAVY DESIGN) --- */
+.contact-popup-modal {
+  padding: 0;
+  max-width: 420px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  overflow: visible;
+}
+
+.contact-popup-content {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  position: relative; /* IMPORTANT: This is the anchor for our new button */
+  text-align: center;
+}
+
+.contact-popup-modal .modal-close-button {
+  display: none;
+}
+
+
+.popup-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  line-height: 1;
+  padding: 0 0 2px 0;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.popup-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: rotate(90deg) scale(1.05);
+}
+
+
+.popup-header {
+  background-image: linear-gradient(135deg, var(--accent-blue), var(--primary-nav));
+  color: white;
+  /* Add padding on the right to make space for our new close button */
+  padding: 30px 50px 10px 30px; 
+  border-radius: 20px 20px 0 0;
+}
+
+.popup-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.wavy-divider {
+  display: block;
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+}
+
+.wavy-divider svg { display: block; }
+
+.popup-form-body { padding: 20px 30px 30px; }
+
+.popup-form { display: flex; flex-direction: column; gap: 20px; }
+
+.popup-input-group { position: relative; }
+
+.popup-input-group .input-icon {
+  position: absolute;
+  left: 15px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-subtle);
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.popup-input-group input:focus + .input-icon,
+.popup-input-group textarea:focus + .input-icon,
+.popup-input-group select:focus + .input-icon {
+  color: var(--accent-blue);
+}
+
+.popup-input-group input,
+.popup-input-group textarea,
+.popup-input-group select {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background: var(--bg-section);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.popup-input-group input::placeholder,
+.popup-input-group textarea::placeholder {
+  color: var(--text-subtle);
+}
+
+.popup-input-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 1em;
+  padding-right: 40px;
+}
+.popup-input-group select:invalid {
+  color: var(--text-subtle);
+}
+
+.popup-input-group textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.popup-input-group input:focus,
+.popup-input-group textarea:focus,
+.popup-input-group select:focus {
+  border-color: var(--accent-blue);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.popup-submit-button {
+  background-image: linear-gradient(to right, var(--accent-teal), var(--accent-blue));
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+.popup-submit-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.4);
+}

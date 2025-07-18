@@ -1,0 +1,219 @@
+/* --- modals.css --- */
+/* Contains styles for all modal pop-ups, including the contact form. */
+
+/* --- GENERAL MODAL SYSTEM --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.4s ease;
+}
+
+.modal-content {
+  position: relative;
+  background: var(--bg-section);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: modal-pop-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes modal-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-subtle);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.modal-close-button:hover {
+  background-color: var(--border-color);
+  transform: rotate(90deg);
+}
+
+/* --- CONTACT POPUP MODAL (WAVY DESIGN) --- */
+.contact-popup-modal {
+  padding: 0;
+  max-width: 420px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 20px;
+  overflow: visible;
+}
+
+.contact-popup-content {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+}
+
+.contact-popup-modal .modal-close-button {
+  background-color: #FFC700;
+  color: var(--primary-dark);
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  top: -12px;
+  right: -12px;
+  border: 2px solid white;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-popup-modal .modal-close-button:hover {
+  transform: translateY(-2px) scale(1.1) rotate(90deg);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+.popup-header {
+  background-image: linear-gradient(135deg, var(--accent-blue), var(--primary-nav));
+  color: white;
+  padding: 30px 20px 10px 20px;
+  border-radius: 20px 20px 0 0;
+}
+
+.popup-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.wavy-divider {
+  display: block;
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+}
+
+.wavy-divider svg {
+  display: block;
+}
+
+.popup-form-body {
+  padding: 20px 30px 30px;
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.popup-input-group {
+  position: relative;
+}
+
+.popup-input-group .input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-subtle);
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.popup-input-group input:focus+.input-icon,
+.popup-input-group textarea:focus+.input-icon,
+.popup-input-group select:focus+.input-icon {
+  color: var(--accent-blue);
+}
+
+.popup-input-group input,
+.popup-input-group textarea,
+.popup-input-group select {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background: var(--bg-section);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.popup-input-group input::placeholder,
+.popup-input-group textarea::placeholder {
+  color: var(--text-subtle);
+}
+
+.popup-input-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 1em;
+  padding-right: 40px;
+}
+
+.popup-input-group select:invalid {
+  color: var(--text-subtle);
+}
+
+.popup-input-group textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.popup-input-group input:focus,
+.popup-input-group textarea:focus,
+.popup-input-group select:focus {
+  border-color: var(--accent-blue);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.popup-submit-button {
+  background-image: linear-gradient(to right, var(--accent-teal), var(--accent-blue));
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+.popup-submit-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.4);
+}

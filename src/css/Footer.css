@@ -1,0 +1,193 @@
+/* --- MODERN FOOTER DESIGN --- */
+.footer {
+  color: #a9b3c9; /* Softer text color for better readability */
+  padding: 80px 0 0;
+  position: relative;
+  overflow: hidden;
+  /* Premium Background: Dark gradient over a subtle world map */
+  background-color: #0d172a;
+  background-image:
+    linear-gradient(rgba(13, 23, 42, 0.95), rgba(13, 23, 42, 1)),
+    url('https://www.svgrepo.com/show/443319/world-map-back-ground.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.footer-grid {
+  display: grid;
+  /* A more balanced 4-column layout */
+  grid-template-columns: 2fr 1fr 1.5fr 1.5fr;
+  gap: 40px;
+  padding-bottom: 50px;
+}
+
+/* Base styles for each column */
+.footer-column {
+  opacity: 0; /* Initially hidden for scroll animation */
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Staggered animation delays for each column */
+.footer-column.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.footer-column.col-1.is-visible { transition-delay: 0.1s; }
+.footer-column.col-2.is-visible { transition-delay: 0.2s; }
+.footer-column.col-3.is-visible { transition-delay: 0.3s; }
+.footer-column.col-4.is-visible { transition-delay: 0.4s; }
+
+/* --- ABOUT & LOGO COLUMN --- */
+.footer-logo-container {
+  background-color: white;
+  padding: 15px;
+  display: inline-block; /* Makes it fit the content */
+  margin-bottom: 25px;
+  /* This creates the unique clipped corner shape */
+  clip-path: polygon(0 20px, 20px 0, 100% 0, 100% 100%, 0 100%);
+}
+.footer-logo {
+  height: 40px;
+  display: block;
+}
+.footer-about-text {
+  line-height: 1.7;
+  max-width: 300px;
+}
+
+/* --- HEADINGS AND LINKS --- */
+.footer-heading {
+  font-size: 1.25rem;
+  color: white;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+}
+/* A subtle accent line below headings */
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  background-color: var(--accent-teal);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-links li {
+  margin-bottom: 12px;
+}
+.footer-links a {
+  text-decoration: none;
+  color: #a9b3c9;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+.footer-links a:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+/* --- CONTACT LIST --- */
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-contact-list li {
+  display: flex;
+  align-items: flex-start; /* Use flex-start for multi-line addresses */
+  gap: 15px;
+}
+.footer-contact-list .icon {
+  color: var(--accent-teal);
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+.footer-contact-list span {
+  flex: 1;
+}
+
+/* --- SOCIALS --- */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 25px;
+}
+.footer-socials a {
+  background-color: rgba(255, 255, 255, 0.05);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+.footer-socials a:hover {
+  background-color: var(--accent-teal);
+  transform: translateY(-4px) scale(1.1);
+}
+
+/* --- BOTTOM BAR --- */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 25px 0;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.footer-bottom-links {
+  display: flex;
+  gap: 20px;
+}
+.footer-bottom-links a {
+  color: #a9b3c9;
+  text-decoration: none;
+}
+.footer-bottom-links a:hover {
+  color: white;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer-logo-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .footer-socials, .footer-bottom {
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .footer-column {
+    transform: none;
+    opacity: 1; /* Disable animations on mobile for simplicity */
+  }
+}

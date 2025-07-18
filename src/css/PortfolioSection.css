@@ -1,0 +1,177 @@
+/* src/css/PortfolioSection.css */
+
+/* --- General Section Styling --- */
+.portfolio-section {
+    padding: 100px 0;
+    background-color: #f0f2f5; /* A very light, clean background */
+}
+
+.portfolio-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.portfolio-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInDown 1s ease-out; /* Added animation */
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.portfolio-section .sub-heading {
+    color: #007bff;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.portfolio-section .main-heading {
+    font-size: 38px;
+    color: #1a2c48;
+    margin: 0 0 15px;
+}
+
+.portfolio-section .section-intro {
+    font-size: 16px;
+    color: #6a717c;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+
+/* --- The Correct and Working Portfolio Card CSS --- */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-card {
+    position: relative; /* This is the anchor for the overlay */
+    height: 400px;
+    border-radius: 16px;
+    overflow: hidden; /* This is the most important rule! It hides the content that slides up. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.portfolio-card:hover .portfolio-image {
+    transform: scale(1.1); /* Subtle zoom on hover */
+}
+
+.portfolio-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* The overlay takes up the full card height */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.9) 90%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Pushes the content to the bottom */
+}
+
+.portfolio-content {
+    color: #fff;
+    padding: 30px;
+    
+    /* Initially, we slide the content DOWN, so most of it is hidden below the card's visible area */
+    /* The calculation hides all content except for the top part (category and title) */
+    transform: translateY(calc(100% - 130px));
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* On hover, we slide the content UP to its natural position (0) to reveal everything */
+.portfolio-card:hover .portfolio-content {
+    transform: translateY(0);
+}
+
+.portfolio-category {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.portfolio-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* These elements start completely transparent and will fade in */
+.portfolio-description,
+.portfolio-link {
+    opacity: 0;
+    transition: opacity 0.4s ease 0.15s; /* Fade in with a small delay after the slide */
+    margin-top: 15px;
+}
+
+/* On hover, they become fully opaque */
+.portfolio-card:hover .portfolio-description,
+.portfolio-card:hover .portfolio-link {
+    opacity: 1;
+}
+
+.portfolio-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.portfolio-link {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+}
+.portfolio-link:hover {
+    border-bottom-color: #007bff;
+}
+.portfolio-link i {
+    transition: transform 0.3s ease;
+}
+.portfolio-link:hover i {
+    transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    .portfolio-section .main-heading {
+        font-size: 32px;
+    }
+}

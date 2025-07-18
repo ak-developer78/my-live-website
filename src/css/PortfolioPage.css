@@ -1,0 +1,140 @@
+/* --- Global Styles for Portfolio Page --- */
+.portfolio-page {
+    background-color: #f9f9ff;
+}
+.portfolio-page .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* --- 1. Hero Section (Consistent Style) --- */
+.portfolio-hero { height: 450px; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; }
+.portfolio-hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(6, 23, 46, 0.75); z-index: 1; }
+.portfolio-hero .container { position: relative; z-index: 2; }
+.portfolio-hero .hero-content-box { background-color: rgba(0, 0, 0, 0.25); padding: 40px 50px; border-radius: 8px; max-width: 500px; border-left: 5px solid #00aaff; }
+.portfolio-hero .hero-content-box h1 { font-size: 3.5rem; color: #ffffff; font-weight: 700; margin: 0 0 10px 0; }
+.portfolio-hero .hero-content-box .breadcrumb { font-size: 1.1rem; color: #dddddd; margin: 0; }
+
+/* --- 2. Portfolio Grid Section (NEW & ENHANCED) --- */
+.portfolio-grid-section {
+    padding: 100px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header .sub-title {
+    color: #007bff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-header h2 {
+    font-size: 38px;
+    color: #0d2340;
+    margin: 10px 0 15px;
+}
+
+.section-header p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.portfolio-item {
+    position: relative;
+    height: 400px; /* Fixed height for the container */
+    border-radius: 12px;
+    overflow: hidden; /* This is KEY for the scroll effect */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    
+    /* Initial state for entry animation */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* State after animation is triggered by JS */
+.portfolio-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.portfolio-item img {
+    width: 100%;
+    /* The image itself is long, so we don't set a height */
+    object-fit: cover;
+    object-position: top;
+    
+    /* The magic for the hover scroll */
+    transition: transform 8s ease-in-out; /* Slow and smooth scroll */
+}
+
+.portfolio-item:hover img {
+    /* Move the image up to show the bottom part */
+    transform: translateY(calc(-100% + 400px)); /* Image height - container height */
+}
+
+/* The hover overlay */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: 25px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.overlay-content {
+    color: #fff;
+    transform: translateY(15px); /* Start slightly down */
+    transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover .overlay-content {
+    transform: translateY(0); /* Move up to final position on hover */
+}
+
+.overlay-content h3 {
+    font-size: 22px;
+    margin: 0 0 5px 0;
+}
+
+.overlay-content p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid-section { padding: 60px 0; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .hero-content-box h1 { font-size: 2.5rem; }
+    .hero-content-box { padding: 30px; max-width: 100%; }
+}

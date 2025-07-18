@@ -1,0 +1,60 @@
+/* --- technologies.css ---
+Styles for the technologies/logo grid section. */
+
+.technologies-section {
+  padding: 80px 0;
+  background-color: var(--bg-section);
+}
+
+.technologies-section .main-heading {
+  color: var(--primary-dark);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 30px;
+}
+
+.tech-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 160px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.tech-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-teal);
+}
+
+.tech-logo-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-logo {
+  height: 60px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.tech-name {
+  font-weight: 600;
+  color: var(--text-dark);
+  /* margin-top: 20px; */
+  font-size: 1rem;
+}

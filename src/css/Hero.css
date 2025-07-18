@@ -1,0 +1,173 @@
+/* --- HERO SECTION BASE --- */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  perspective: 1500px;
+}
+
+/* --- NEW: ANIMATED OVERLAY --- */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(225deg, rgba(13, 23, 42, 0.8), rgba(59, 130, 246, 0.7), rgba(13, 23, 42, 0.8));
+  background-size: 200% 200%; /* Important for gradient animation */
+  z-index: 1;
+  animation: breathing-gradient 10s ease infinite;
+}
+@keyframes breathing-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+/* --- BACKGROUND IMAGE FLIP ANIMATION --- */
+.hero-flip-container {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.hero-flip-container.is-flipping { transform: rotateY(180deg); }
+.hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.hero-bg-slide.back { transform: rotateY(180deg); }
+
+/* --- HERO TEXT & ANIMATIONS --- */
+.hero-text h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem); /* Slightly larger */
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+.hero-text p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  opacity: 0.9;
+}
+@keyframes pop-in-bouncy {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { opacity: 1; transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.hero-text.pop-in-bouncy {
+  animation: pop-in-bouncy 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.hero-text.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* --- NEW, ENHANCED HERO BUTTONS --- */
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px; /* More space between buttons */
+  margin-top: 1.5rem;
+}
+
+.cta-button {
+  padding: 14px 35px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+/* Primary Button Style (Solid) */
+.cta-button.primary {
+  background-color: var(--accent-teal);
+  border-color: var(--accent-teal);
+  color: white;
+}
+.cta-button.primary:hover {
+  background-color: #119a8b;
+  border-color: #119a8b;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
+}
+
+/* Secondary (Ghost/Outline) Button Style */
+.cta-button.secondary {
+  background-color: transparent;
+  color: var(--text-light);
+  border-color: var(--text-light);
+}
+.cta-button.secondary:hover {
+  background-color: var(--text-light);
+  color: var(--primary-dark);
+  transform: translateY(-4px);
+}
+.about-section { padding: 80px 0; }
+.about-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; }
+.about-image-container img { width: 100%; border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+.mission-statement { color: var(--text-subtle); line-height: 1.7; font-size: 1.1rem; border-left: 3px solid var(--accent-teal); padding-left: 20px; margin: 20px 0 30px; }
+.about-stats { display: flex; gap: 40px; margin-top: 30px; }
+.stat-item { text-align: center; }
+.stat-item h3 { font-size: 2.5rem; color: var(--accent-teal); font-weight: 700; }
+.stat-item p { color: var(--text-subtle); font-weight: 500; }
+/* Section Styling */
+.portfolio-section {
+  padding: 80px 0;
+  background-color: var(--bg-section);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styling */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sub-heading {
+  color: var(--accent-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.main-heading {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+}
+
+.section-intro {
+  font-size: 1.125rem; /* 18px */
+  color: var(--text-gray);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}

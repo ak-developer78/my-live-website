@@ -1,0 +1,35 @@
+.back-to-top-button {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background-color: var(--primary-dark);
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+.back-to-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top-button:hover {
+  background-color: var(--accent-teal);
+}
+
+@media (max-width: 480px) {
+  .back-to-top-button {
+    bottom: 80px;
+    right: 15px;
+  }
+}

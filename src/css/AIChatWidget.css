@@ -1,0 +1,136 @@
+/* --- AI CHAT WIDGET --- */
+
+.ai-chat-widget {
+  position: fixed !important; /* Use !important to override any conflicting styles */
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000; /* Keeps it on top of other content */
+}
+/* --- END OF FIX --- */
+
+
+/* The floating bubble that triggers the chatbox */
+.ai-chat-bubble {
+  width: 52px;
+  height: 52px;
+  font-size: 22px;
+  border-radius: 50%;
+  background-image: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ai-chat-bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.widget-open .ai-chat-bubble {
+  background-image: linear-gradient(135deg, #e53e3e, #f56565);
+  transform: rotate(180deg);
+}
+
+/* The main chatbox window */
+.ai-chatbox {
+  position: absolute; /* Positioned relative to the .ai-chat-widget container */
+  bottom: 70px;
+  right: 0;
+  width: 370px;
+  max-width: 90vw;
+  height: 550px;
+  max-height: 70vh;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.widget-open .ai-chatbox {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.chatbox-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: var(--bg-section);
+  color: var(--text-subtle);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  line-height: 1;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+.chatbox-close-btn:hover {
+  background: var(--accent-blue);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.chatbox-header {
+  grid-row: 1 / 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px 15px 20px;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chatbox-header-info { display: flex; align-items: center; gap: 12px; }
+.chatbox-header-info img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.chatbox-header-info strong { font-size: 1rem; color: var(--primary-dark); }
+.chatbox-header-actions button {
+  background: none; border: none; cursor: pointer; color: var(--text-subtle);
+  font-size: 16px; width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+}
+.chatbox-header-actions button:hover {
+  background-color: var(--border-color); color: var(--primary-dark);
+}
+
+/* Messages Area */
+.chatbox-messages {
+  grid-row: 2 / 3; padding: 20px; overflow-y: auto; display: flex;
+  flex-direction: column; gap: 15px;
+}
+.message { display: flex; max-width: 80%; }
+.message-bubble { padding: 10px 15px; border-radius: 18px; line-height: 1.5; }
+.message.ai { align-self: flex-start; }
+.message.ai .message-bubble { background-color: var(--bg-section); color: var(--text-dark); border-top-left-radius: 5px; }
+.message.user { align-self: flex-end; }
+.message.user .message-bubble { background-color: var(--accent-blue); color: white; border-top-right-radius: 5px; }
+
+/* Footer and Input */
+.chatbox-footer { grid-row: 3 / 4; padding: 15px 20px; border-top: 1px solid var(--border-color); }
+.chatbox-input-form { display: flex; align-items: center; gap: 10px; background-color: var(--bg-section); border-radius: 12px; padding: 5px; }
+.chatbox-input-form input { flex-grow: 1; border: none; outline: none; background: transparent; padding: 8px; color: var(--text-dark); }
+.chatbox-input-form button { border: none; background: none; cursor: pointer; color: var(--text-subtle); width: 36px; height: 36px; font-size: 16px; border-radius: 8px; transition: all 0.2s ease; }
+.chatbox-input-form button:hover { background-color: var(--border-color); color: var(--primary-dark); }
+.chatbox-input-form .send-button { background-color: var(--accent-blue); color: white; }
+.chatbox-input-form .send-button:hover { background-color: var(--accent-teal); }
+.chatbox-branding { text-align: center; font-size: 0.8rem; color: var(--text-subtle); margin-top: 10px; }
+.chatbox-branding span { font-weight: 600; color: var(--text-dark); }

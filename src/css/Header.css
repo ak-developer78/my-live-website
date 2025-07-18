@@ -1,0 +1,517 @@
+/* --- Import Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- General & Variables --- */
+:root {
+  --primary-dark-blue: #0d2340;
+  --primary-white: #ffffff;
+  --text-dark: #333333;
+  --text-nav: #0d2340;
+  --border-light: #eeeeee;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Sticky Header Container --- */
+.header-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Top Bar --- */
+.top-bar {
+  background-color: var(--primary-dark-blue);
+  color: var(--primary-white);
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.top-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-white);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact-item:hover {
+  opacity: 0.8;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-links a img {
+  height: 18px;
+  width: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.social-links a:hover img {
+  opacity: 1;
+}
+
+
+/* --- Main Navigation Bar --- */
+.main-nav {
+  background-color: var(--primary-white);
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-nav);
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 5px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-dark-blue);
+  transition: width 0.3s ease;
+}
+
+/* --- UPDATE: Underline now ONLY appears on hover --- */
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Text color changes on hover or if you add an 'active' class back */
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-dark-blue);
+}
+
+
+.dropdown-caret {
+  font-size: 12px;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.nav-item-dropdown:hover .dropdown-caret {
+  transform: rotate(180deg);
+}
+
+/* --- Creative Service Dropdown --- */
+.nav-item-dropdown {
+  position: relative;
+}
+
+.service-dropdown {
+  position: absolute;
+  top: 130%; 
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: var(--primary-white);
+  border-radius: 8px;
+  padding: 20px 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-top: 3px solid var(--primary-dark-blue);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 1100;
+  width: max-content;
+}
+
+.service-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 40px; 
+}
+
+.service-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.service-dropdown a {
+  color: var(--text-dark);
+  font-weight: 400;
+  font-size: 15px;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.service-dropdown a::after {
+  display: none;
+}
+
+.service-dropdown a:hover {
+  background-color: #f5f5f5;
+  color: var(--primary-dark-blue);
+}
+
+
+/* --- Nav Actions (Button & Hamburger) --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.meet-button {
+  background-color: var(--primary-dark-blue);
+  color: var(--primary-white);
+  border: none;
+  padding: 12px 25px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.meet-button:hover {
+  background-color: #1a3a63;
+  transform: translateY(-2px);
+}
+
+.hamburger-menu {
+  display: none; 
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-nav);
+}
+
+/* --- Responsive Design (for Mobile/Tablet) --- */
+@media (max-width: 1024px) {
+  .nav-links-wrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-white);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  .nav-links-wrapper.open {
+    display: block;
+  }
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 0;
+  }
+  .nav-links li {
+    width: 100%;
+  }
+  .nav-links a {
+    display: block;
+    padding: 12px 15px;
+    width: 100%;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .nav-links a::after {
+    display: none;
+  }
+  .nav-links a.active {
+    background-color: #f8f9fa;
+  }
+  .meet-button {
+    display: none;
+  }
+  .hamburger-menu {
+    display: block;
+  }
+  .service-dropdown { 
+    display: none !important; 
+  }
+  .nav-item-dropdown:hover .dropdown-caret {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        display: none;
+    }
+    .top-bar-inner {
+        justify-content: flex-end; 
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add this to your existing Header.css file */
+
+.nav-link-button {
+  /* Reset button styles */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  
+  /* Inherit link styles */
+  font-family: inherit; /* Use the same font as other links */
+  font-size: 16px; /* Match the font size */
+  font-weight: 500; /* Match the font weight */
+  color: #0d2340; /* Match the link color */
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.nav-link-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #0d2340;
+  transition: width 0.3s ease;
+}
+
+.nav-link-button:hover::after {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- ADD THESE STYLES TO THE END OF YOUR Header.css --- */
+
+/* Style for the logo as a button to make it clickable */
+.logo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Base style for navigation items that are now buttons */
+.nav-link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-nav);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Underline effect for both button and the regular 'Service' link */
+.nav-link-button::after, .service-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-dark-blue);
+  transition: width 0.3s ease;
+}
+
+.nav-link-button:hover::after, .service-link:hover::after {
+  width: 100%;
+}
+
+/* Style for the active page link */
+.nav-link-button.active {
+  color: var(--primary-dark-blue);
+}
+
+.nav-link-button.active::after {
+  width: 100%;
+}
+
+/* Ensure the regular service link has consistent styling with buttons */
+.service-link {
+  text-decoration: none;
+  color: var(--text-nav);
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 5px;
+  position: relative;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Add this to the end of your Header.css file */
+
+.service-dropdown button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  color: var(--text-dark);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.service-dropdown button:hover {
+  background-color: #f5f5f5;
+  color: var(--primary-dark-blue);
+}

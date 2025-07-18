@@ -1,0 +1,49 @@
+/* --- about.css --- */
+/* Styles for the "About Us" section. */
+
+.about-section {
+  padding: 80px 0;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+.about-image-container img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.mission-statement {
+  color: var(--text-subtle);
+  line-height: 1.7;
+  font-size: 1.1rem;
+  border-left: 3px solid var(--accent-teal);
+  padding-left: 20px;
+  margin: 20px 0 30px;
+}
+
+.about-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 2.5rem;
+  color: var(--accent-teal);
+  font-weight: 700;
+}
+
+.stat-item p {
+  color: var(--text-subtle);
+  font-weight: 500;
+}

@@ -1,0 +1,86 @@
+/* --- base.css --- */
+/* Contains color palette, global styles, and common utility classes. */
+
+/* --- MODERN COLOR PALETTE & BASE STYLES --- */
+:root {
+  --primary-dark: #111827;
+  --primary-nav: #0369A1;
+  --accent-teal: #14B8A6;
+  --accent-blue: #3B82F6;
+  --text-light: #F9FAFB;
+  --text-dark: #111827;
+  --text-subtle: #6B7280;
+  --bg-light: #FFFFFF;
+  --bg-section: #F9FAFB;
+  --border-color: #E5E7EB;
+  --footer-bg: #0d172a;
+  --footer-text: #a9b3c9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sub-heading {
+  color: var(--accent-teal);
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.main-heading {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.section-header p {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-subtle);
+  line-height: 1.6;
+}
+
+/* --- GLOBAL ANIMATIONS --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

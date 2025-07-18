@@ -1,0 +1,46 @@
+import React from 'react';
+import '../css/TechnologiesSection.css'
+// Updated data with image URLs for each technology logo
+const techData = [
+  { name: 'Python', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'React', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'Node.js', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'Java', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+  { name: 'Android', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg' },
+  { name: 'Swift', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg' },
+  { name: 'Flutter', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+  { name: 'AWS', imgUrl: 'data:image/png;base64,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' },
+  { name: 'Docker', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+  { name: 'Kubernetes', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-original.svg' },
+  { name: 'MongoDB', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+  { name: 'PostgreSQL', imgUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+];
+
+const TechnologiesSection = () => {
+  return (
+    <section className="technologies-section">
+      <div className="container">
+        <div className="section-header">
+          <h3 className="sub-heading">Our Tech Stack</h3>
+          <h2 className="main-heading">Pioneering with Cutting-Edge Technology</h2>
+        </div>
+        <div className="tech-grid">
+          {techData.map((tech, index) => (
+            <div 
+              className="tech-card" 
+              key={tech.name}
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
+              <div className="tech-logo-container">
+                <img src={tech.imgUrl} alt={`${tech.name} logo`} className="tech-logo" />
+              </div>
+              <p className="tech-name">{tech.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TechnologiesSection;
