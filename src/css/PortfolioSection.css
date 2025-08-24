@@ -1,177 +1,170 @@
-/* src/css/PortfolioSection.css */
+/* src/css/UniquePortfolio.css  <-- NEW CSS FILE */
 
-/* --- General Section Styling --- */
-.portfolio-section {
+/* --- Section Header (Using unique classes to avoid conflict) --- */
+.unique-portfolio-section {
     padding: 100px 0;
-    background-color: #f0f2f5; /* A very light, clean background */
+    background-color: #F9FAFB; /* Using a color from your global palette */
 }
 
-.portfolio-section .container {
+.unique-portfolio-container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
 }
 
-.portfolio-section .section-header {
+.unique-portfolio-header {
     text-align: center;
     margin-bottom: 60px;
-    animation: fadeInDown 1s ease-out; /* Added animation */
 }
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.portfolio-section .sub-heading {
-    color: #007bff;
+.unique-portfolio-subheading {
+    color: #14B8A6; /* --accent-teal */
     font-weight: 600;
-    text-transform: uppercase;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
-
-.portfolio-section .main-heading {
-    font-size: 38px;
-    color: #1a2c48;
-    margin: 0 0 15px;
+.unique-portfolio-mainheading {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    color: #111827; /* --primary-dark */
+    margin-bottom: 15px;
+    font-weight: 700;
 }
-
-.portfolio-section .section-intro {
-    font-size: 16px;
-    color: #6a717c;
+.unique-portfolio-header p {
     max-width: 600px;
     margin: 0 auto;
+    color: #6B7280; /* --text-subtle */
     line-height: 1.6;
 }
 
 
-/* --- The Correct and Working Portfolio Card CSS --- */
+/* --- The Guaranteed Working Portfolio Card Styles --- */
 
-.portfolio-grid {
+.unique-portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 30px;
 }
 
-.portfolio-card {
-    position: relative; /* This is the anchor for the overlay */
+/* THE CARD CONTAINER - These properties are essential for the effect */
+.unique-portfolio-card {
+    position: relative; /* Anchor for the overlay */
+    overflow: hidden;   /* Hides the content that slides outside the card */
+    z-index: 10;        /* Puts the card on a higher layer to ensure it can be hovered */
+
     height: 400px;
     border-radius: 16px;
-    overflow: hidden; /* This is the most important rule! It hides the content that slides up. */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
 }
 
-.portfolio-card:hover {
+.unique-portfolio-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    z-index: 20; /* Jumps even higher on hover */
 }
 
-.portfolio-image {
+.unique-portfolio-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.6s ease;
 }
 
-.portfolio-card:hover .portfolio-image {
-    transform: scale(1.1); /* Subtle zoom on hover */
+.unique-portfolio-card:hover .unique-portfolio-image {
+    transform: scale(1.1);
 }
 
-.portfolio-overlay {
+/* THE SLIDING OVERLAY - This is what moves */
+.unique-portfolio-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* The overlay takes up the full card height */
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.9) 90%);
+    height: 100%;
+    background: linear-gradient(180deg, rgba(17, 24, 39, 0) 0%, rgba(17, 24, 39, 0.9) 80%);
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Pushes the content to the bottom */
-}
+    align-items: flex-end;
 
-.portfolio-content {
-    color: #fff;
-    padding: 30px;
-    
-    /* Initially, we slide the content DOWN, so most of it is hidden below the card's visible area */
-    /* The calculation hides all content except for the top part (category and title) */
-    transform: translateY(calc(100% - 130px));
+    /* Initially, slide the overlay DOWN */
+    transform: translateY(calc(100% - 120px));
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* On hover, we slide the content UP to its natural position (0) to reveal everything */
-.portfolio-card:hover .portfolio-content {
+/* THE HOVER ACTION - This triggers the slide */
+.unique-portfolio-card:hover .unique-portfolio-overlay {
     transform: translateY(0);
 }
 
-.portfolio-category {
+/* --- Text content styling --- */
+.unique-portfolio-content {
+    color: #F9FAFB;
+    padding: 30px;
+    width: 100%;
+}
+
+.unique-portfolio-category {
     display: inline-block;
-    background-color: #007bff;
-    color: white;
+    background-color: #14B8A6;
+    color: #111827;
     padding: 5px 14px;
     border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
     margin-bottom: 15px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-.portfolio-title {
+.unique-portfolio-title {
     font-size: 1.6rem;
     font-weight: 700;
     margin: 0;
     line-height: 1.2;
 }
 
-/* These elements start completely transparent and will fade in */
-.portfolio-description,
-.portfolio-link {
+/* THE REVEAL - These elements fade in on hover */
+.unique-portfolio-description,
+.unique-portfolio-link {
     opacity: 0;
-    transition: opacity 0.4s ease 0.15s; /* Fade in with a small delay after the slide */
+    transition: opacity 0.4s ease 0.2s; /* Delayed fade-in */
     margin-top: 15px;
 }
 
-/* On hover, they become fully opaque */
-.portfolio-card:hover .portfolio-description,
-.portfolio-card:hover .portfolio-link {
+.unique-portfolio-card:hover .unique-portfolio-description,
+.unique-portfolio-card:hover .unique-portfolio-link {
     opacity: 1;
 }
 
-.portfolio-description {
+.unique-portfolio-description {
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 20px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(249, 250, 251, 0.9);
 }
 
-.portfolio-link {
-    color: #fff;
+.unique-portfolio-link {
+    color: #F9FAFB;
     font-weight: 600;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 2px solid transparent;
     padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
 }
-.portfolio-link:hover {
-    border-bottom-color: #007bff;
+.unique-portfolio-link:hover {
+    border-bottom-color: #14B8A6;
 }
-.portfolio-link i {
+.unique-portfolio-link i {
     transition: transform 0.3s ease;
 }
-.portfolio-link:hover i {
+.unique-portfolio-link:hover i {
     transform: translateX(5px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .portfolio-grid {
+    .unique-portfolio-grid {
         grid-template-columns: 1fr;
-    }
-    .portfolio-section .main-heading {
-        font-size: 32px;
     }
 }
