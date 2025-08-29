@@ -564,9 +564,7 @@
 
 
 
-
-
-// src/App.jsx
+// src/App.jsx (Complete & Updated)
 
 import React, { useState, useEffect } from 'react';
 
@@ -594,17 +592,13 @@ import { serviceData } from './data/serviceData';
 // Import Icons
 import { FaUser, FaEnvelope, FaPencilAlt, FaConciergeBell } from 'react-icons/fa';
 
-// --- NEW: Define your logo URL here for the preloader ---
 const logoUrl = 'https://solvebytez.com/assets/images/logos/main-logo.png';
-
 const servicesList = [
   "Mobile Application", "Web Application", "Digital Marketing", "Game Development",
   "Augmented Reality (AR)", "Virtual Reality (VR)", "Blockchain Technology",
   "AI-Powered Solutions", "UI/UX"
 ];
 
-// --- NEW: The Advanced Preloader Component ---
-// This component has the new structure for our advanced animation.
 const Preloader = ({ isHiding }) => (
   <div className={`preloader-overlay ${isHiding ? 'hiding' : ''}`}>
     <div className="preloader-gate-left"></div>
@@ -617,71 +611,107 @@ const Preloader = ({ isHiding }) => (
 );
 
 function App() {
-  // --- UPDATED: We now have two states to manage the loading process ---
-  const [isLoading, setIsLoading] = useState(true);     // Is the preloader component in the DOM?
-  const [isHiding, setIsHiding] = useState(false);     // Is the preloader currently doing its exit animation?
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [isHiding, setIsHiding] = useState(false);
   const [currentPage, setCurrentPage] = useState({ page: 'home', slug: null });
   const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
 
-  // --- UPDATED: This effect now handles the two-stage exit animation ---
+  // --- NEW: State for the popup form data and submission status ---
+  const [popupFormData, setPopupFormData] = useState({
+    fullName: '', email: '', service: '', message: ''
+  });
+  const [isPopupSubmitting, setIsPopupSubmitting] = useState(false);
+  const [popupStatus, setPopupStatus] = useState({ message: '', type: '' }); // type can be 'success' or 'error'
+
+  // Preloader useEffect remains the same
   useEffect(() => {
-    // Stage 1: Wait for 2 seconds, then start the HIDING animation.
-    const hideTimer = setTimeout(() => {
-      setIsHiding(true);
-    }, 2000); // 2-second initial wait
-
-    // Stage 2: Wait for the hide animation to finish (800ms), then remove the preloader from the DOM.
-    const removeTimer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2800); // 2000ms wait + 800ms animation
-
-    // Cleanup function
-    return () => {
-      clearTimeout(hideTimer);
-      clearTimeout(removeTimer);
-    };
+    const hideTimer = setTimeout(() => setIsHiding(true), 2000);
+    const removeTimer = setTimeout(() => setIsLoading(false), 2800);
+    return () => { clearTimeout(hideTimer); clearTimeout(removeTimer); };
   }, []);
 
-  // Existing effect for the contact popup
+  // Popup open timer useEffect remains the same
   useEffect(() => {
     let timer;
     if (!isLoading && currentPage.page === 'home') {
-      timer = setTimeout(() => {
-        setIsContactPopupOpen(true);
-      }, 5000);
+      timer = setTimeout(() => setIsContactPopupOpen(true), 5000);
     }
     return () => clearTimeout(timer);
   }, [currentPage, isLoading]);
 
-  const handlePopupFormSubmit = (e) => { e.preventDefault(); alert('Message Sent!'); setIsContactPopupOpen(false); };
+  // --- NEW: Handle changes in the popup form inputs ---
+  const handlePopupChange = (e) => {
+    const { name, value } = e.target;
+    setPopupFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // --- UPDATED: This function now sends data to the backend ---
+  const handlePopupFormSubmit = async (e) => {
+    e.preventDefault();
+    setIsPopupSubmitting(true);
+    setPopupStatus({ message: '', type: '' });
+
+    try {
+      const response = await fetch('http://localhost:8000/api/popup-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(popupFormData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setPopupStatus({ message: result.msg, type: 'success' });
+        setPopupFormData({ fullName: '', email: '', service: '', message: '' }); // Clear form
+        setTimeout(() => setIsContactPopupOpen(false), 2000); // Close modal after 2 seconds
+      } else {
+        setPopupStatus({ message: `Error: ${result.msg}`, type: 'error' });
+      }
+    } catch (error) {
+      console.error('Popup submission error:', error);
+      setPopupStatus({ message: 'Failed to connect to the server.', type: 'error' });
+    } finally {
+      setIsPopupSubmitting(false);
+    }
+  };
+
   const handleNavigate = (page, slug = null) => { setCurrentPage({ page, slug }); window.scrollTo(0, 0); };
   const renderPage = () => { /* ... (renderPage logic remains the same) ... */ switch(currentPage.page){case 'home':return(<> <Hero /> <AboutSection /> <PortfolioSection /> <ServicesSection /> <TechnologiesSection /> <CallToActionSection onOpenContactModal={()=>setIsContactPopupOpen(true)}/></>);case 'about':return <AboutPage />;case 'portfolio':return <PortfolioPage />;case 'contact':return <ContactPage />;case 'service':{const selectedService=serviceData.find(s=>s.slug===currentPage.slug);return <ServicePage service={selectedService}/>;} default:return(<> <Hero /> <AboutSection /> <PortfolioSection /> <ServicesSection /> <TechnologiesSection /> <CallToActionSection onOpenContactModal={()=>setIsContactPopupOpen(true)}/></>);}};
 
   return (
     <>
-      {/* Show the preloader as long as isLoading is true */}
       {isLoading && <Preloader isHiding={isHiding} />}
 
-      {/* Show the main website ONLY when the preloader is fully gone */}
       {!isLoading && (
         <div className="website-content">
           <Header onNavigate={handleNavigate} currentPage={currentPage.page} />
           <main>{renderPage()}</main>
           <Footer />
           <AIChatWidget />
+          
+          {/* --- UPDATED MODAL AND FORM --- */}
           <Modal isOpen={isContactPopupOpen} onClose={() => setIsContactPopupOpen(false)} customClass="contact-popup-modal">
             <div className="contact-popup-content">
               <button aria-label="Close modal" className="popup-close-btn" onClick={() => setIsContactPopupOpen(false)}>×</button>
               <div className="popup-header"><h2>Get In Touch</h2></div>
-              <div className="wavy-divider"><svg viewBox="0 0 500 40" preserveAspectRatio="none" style={{width:'100%',height:'100%'}}><path d="M0,20 C150,40 350,0 500,20 L500,00 L0,0 Z" style={{stroke:'none',fill:'var(--primary-dark-blue, #0d2340)'}}></path></svg></div>
+              <div className="wavy-divider"><svg viewBox="0 0 500 40" preserveAspectRatio="none"><path d="M0,20 C150,40 350,0 500,20 L500,00 L0,0 Z" style={{stroke:'none',fill:'var(--primary-dark-blue, #0d2340)'}}></path></svg></div>
               <div className="popup-form-body">
+                
+                {/* NEW: Display status message */}
+                {popupStatus.message && (
+                  <div className={`status-message ${popupStatus.type}`}>
+                    {popupStatus.message}
+                  </div>
+                )}
+
                 <form className="popup-form" onSubmit={handlePopupFormSubmit}>
-                  <div className="popup-input-group"><input type="text" id="popup-name" name="fullName" placeholder="Your Name" required /><FaUser className="input-icon" /></div>
-                  <div className="popup-input-group"><input type="email" id="popup-email" name="email" placeholder="Your Email" required /><FaEnvelope className="input-icon" /></div>
-                  <div className="popup-input-group"><select id="popup-service" name="service" required defaultValue=""><option value="" disabled>Select a Service</option>{servicesList.map((service, index) => (<option key={index} value={service}>{service}</option>))}</select><FaConciergeBell className="input-icon" /></div>
-                  <div className="popup-input-group"><textarea id="popup-message" name="message" placeholder="Your Message" required></textarea><FaPencilAlt className="input-icon" style={{top:'22px'}}/></div>
-                  <button type="submit" className="popup-submit-button">Send Message</button>
+                  <div className="popup-input-group"><input type="text" id="popup-name" name="fullName" placeholder="Your Name" value={popupFormData.fullName} onChange={handlePopupChange} required /><FaUser className="input-icon" /></div>
+                  <div className="popup-input-group"><input type="email" id="popup-email" name="email" placeholder="Your Email" value={popupFormData.email} onChange={handlePopupChange} required /><FaEnvelope className="input-icon" /></div>
+                  <div className="popup-input-group"><select id="popup-service" name="service" value={popupFormData.service} onChange={handlePopupChange} required><option value="" disabled>Select a Service</option>{servicesList.map((service, index) => (<option key={index} value={service}>{service}</option>))}</select><FaConciergeBell className="input-icon" /></div>
+                  <div className="popup-input-group"><textarea id="popup-message" name="message" placeholder="Your Message" value={popupFormData.message} onChange={handlePopupChange} required></textarea><FaPencilAlt className="input-icon" style={{top:'22px'}}/></div>
+                  <button type="submit" className="popup-submit-button" disabled={isPopupSubmitting}>
+                    {isPopupSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
                 </form>
               </div>
             </div>
