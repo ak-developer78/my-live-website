@@ -1,6 +1,17 @@
 /* --- MODERN COLOR PALETTE & BASE STYLES --- */
-:root {
-  --primary-dark: #111827; --primary-nav: #0369A1; --accent-teal: #14B8A6; --accent-blue: #3B82F6; --text-light: #F9FAFB; --text-dark: #111827; --text-subtle: #6B7280; --bg-light: #FFFFFF; --bg-section: #F9FAFB; --border-color: #E5E7EB; --footer-bg: #0d172a; --footer-text: #a9b3c9;
+:root { 
+  --primary-dark: #111827; 
+  --primary-nav: #0369A1; 
+  --accent-teal: #14B8A6; 
+  --accent-blue: #3B82F6; 
+  --text-light: #F9FAFB; 
+  --text-dark: #111827; 
+  --text-subtle: #6B7280; 
+  --bg-light: #FFFFFF; 
+  --bg-section: #F9FAFB; 
+  --border-color: #E5E7EB; 
+  --footer-bg: #0d172a; 
+  --footer-text: #a9b3c9;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: var(--bg-light); color: var(--text-dark); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -39,7 +50,6 @@ body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: var(--bg
   .popup-left { display: none; }
   .popup-right { padding: 40px 25px 25px; }
   .popup-profile-pic { margin-top: -60px; }
-  
 }
 @media (max-width: 480px) {
   .ai-chatbox { width: calc(100% - 20px); right: 10px; bottom: 80px; height: calc(100% - 100px); max-height: 500px;}
@@ -48,79 +58,85 @@ body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: var(--bg
 }
 
 
-
-
-
-
-
-/* --- MODERN COLOR PALETTE & BASE STYLES --- */
-:root { /* ... your variables ... */ }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { /* ... your body styles ... */ }
-.container { /* ... your container styles ... */ }
-/* ... etc. ... */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-
 /* --- ADVANCED PRELOADER (NEW) --- */
 .preloader-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-/* The "Curtain" Panels */
-.preloader-gate-left, .preloader-gate-right {
-  position: fixed;
-  top: 0;
-  width: 50.1%; /* Use 50.1% to prevent 1px gap on some screens */
-  height: 100%;
   background-color: var(--primary-dark);
-  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
-  z-index: 10000;
+  transition: opacity 0.8s ease-out;
 }
-.preloader-gate-left { left: 0; }
-.preloader-gate-right { right: 0; }
 
-/* The Logo container, sits on top of the gates */
+/* Container for the logos, positioning them relative to each other */
 .preloader-logo-container {
   position: relative;
   width: 200px; /* Adjust size as needed */
   height: 50px;
   z-index: 10001;
   transition: opacity 0.4s ease;
+  margin-bottom: 20px;
 }
-.preloader-logo-grayscale, .preloader-logo-color {
+
+/* The base grayscale logo */
+.preloader-logo-grayscale {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-.preloader-logo-color {
-  /* The "fill" animation */
-  animation: fill-reveal 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-}
-.preloader-logo-grayscale {
   filter: grayscale(100%) brightness(1.5);
 }
 
+/* The color logo that gets revealed by the progress bar */
+.preloader-logo-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* This is the key: we use a clip-path that's controlled by the progress bar */
+  clip-path: inset(0 100% 0 0); /* Starts hidden, will be animated by JS */
+  animation: logo-fill-reveal 2.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* The progress bar container */
+.preloader-progress-bar {
+  width: 250px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* The inner filling bar */
+.preloader-progress-fill {
+  width: 0%;
+  height: 100%;
+  background-color: var(--accent-teal);
+  border-radius: 3px;
+  animation: progress-fill 2.8s linear forwards;
+}
+
 /* The EXIT ANIMATIONS, triggered when the 'hiding' class is added */
-.preloader-overlay.hiding .preloader-gate-left {
-  transform: translateX(-100%);
-}
-.preloader-overlay.hiding .preloader-gate-right {
-  transform: translateX(100%);
-}
-.preloader-overlay.hiding .preloader-logo-container {
+.preloader-overlay.hiding {
   opacity: 0;
 }
 
+/* Keyframe for the progress bar animation */
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
 /* Keyframe for the logo fill effect */
-@keyframes fill-reveal {
+@keyframes logo-fill-reveal {
   from { clip-path: inset(0 100% 0 0); }
   to { clip-path: inset(0 0 0 0); }
 }
@@ -129,8 +145,3 @@ body { /* ... your body styles ... */ }
 .website-content {
   animation: fadeIn 0.8s ease-out;
 }
-/* --- END OF PRELOADER SECTION --- */
-
-
-/* --- HEADER, MODAL, RESPONSIVE, and other styles from your file go here... --- */
-/* (All of your other CSS styles remain the same) */
