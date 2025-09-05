@@ -1,10 +1,9 @@
-# .github/workflows/deploy.yml
 name: Deploy Vite React app to GitHub Pages
 
 on:
   push:
-    branches: ["main"]   # Runs when pushing to main branch
-  workflow_dispatch:      # Allows manual trigger from Actions tab
+    branches: ["main"]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -43,7 +42,7 @@ jobs:
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist   # Vite outputs files here
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
